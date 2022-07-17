@@ -21,4 +21,9 @@ export class AppointmentsController {
   async create(@Body() createAppointmentDto: CreateAppointmentDto) {
     return await this.appointmentsService.create(createAppointmentDto);
   }
+
+  // @Post('accept/id')
+  // async accept(@Body() createAppointmentDto: CreateAppointmentDto) {
+  //   return await this.appointmentsService.accept(createAppointmentDto);
+  // }
 }

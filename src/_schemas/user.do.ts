@@ -8,7 +8,7 @@ export class UserDo {
   phone: string;
   name: string;
   type: string;
-  appointments: string;
+  appointments: Types.ObjectId[];
 
   constructor(props: Partial<UserDo>) {
     this._id = props._id;

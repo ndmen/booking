@@ -7,12 +7,14 @@ import {
   Appointment,
 } from 'src/_schemas/appointment.schema';
 import { AppointmentsRepository } from './appointments.repository';
+import { UsersModule } from 'src/users/users.module';
 
 @Module({
   imports: [
     MongooseModule.forFeature([
       { name: Appointment.name, schema: AppointmentSchema },
     ]),
+    UsersModule,
   ],
   controllers: [AppointmentsController],
   providers: [AppointmentsService, AppointmentsRepository],

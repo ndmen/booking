@@ -17,4 +17,12 @@ export class UsersService {
     }
     return user;
   }
+
+  async updateAppointment(user, appointment): Promise<any> {
+    const updatedUser = this.usersRepository.updateOne(user, appointment);
+    if (!updatedUser) {
+      throw new NotFoundException('User not found');
+    }
+    return updatedUser;
+  }
 }

@@ -10,7 +10,7 @@ export class DoctorDo {
   type: string;
   spec: string;
   free: boolean;
-  appointments_accepted: string[];
+  appointments_accepted: Types.ObjectId[];
 
   constructor(props: Partial<DoctorDo>) {
     this._id = props._id;

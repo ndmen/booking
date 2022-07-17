@@ -17,4 +17,12 @@ export class UsersRepository {
     const findOne = await this.userModel.findOne({ email: email });
     return findOne;
   }
+
+  async updateOne(user, appointment): Promise<any> {
+    const updateOne = await this.userModel.updateOne(
+      { _id: user },
+      { $push: { appointments: appointment } },
+    );
+    return updateOne;
+  }
 }
