@@ -9,12 +9,12 @@ export class DoctorsRepository {
   ) {}
 
   async createOne(doctor): Promise<any> {
-    const createOne = await this.doctorModel.create(doctor);
-    return createOne;
+    const result = await this.doctorModel.create(doctor);
+    return result;
   }
 
   async findOne(email): Promise<any> {
-    const findOne = await this.doctorModel.findOne({ email: email });
-    return findOne;
+    const result = await this.doctorModel.findOne({ email: email });
+    return result;
   }
 }
