@@ -21,4 +21,9 @@ export class AppointmentsController {
   async acceptAappointment(@Param('appointment_id') appointment_id: string) {
     return await this.appointmentsService.acceptAappointment(appointment_id);
   }
+
+  @Post('decline/:appointment_id')
+  async declineAappointment(@Param('appointment_id') appointment_id: string) {
+    return await this.appointmentsService.declineAappointment(appointment_id);
+  }
 }

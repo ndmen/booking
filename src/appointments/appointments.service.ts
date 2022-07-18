@@ -41,4 +41,15 @@ export class AppointmentsService {
     }
     return acceptAppointment;
   }
+
+  async declineAappointment(appointment_id: string): Promise<any> {
+    const findAppointment = await this.findAappointmentById(appointment_id);
+    const acceptAppointment = await this.appointmentsRepository.updateOne(
+      findAppointment._id,
+    );
+    if (!acceptAppointment) {
+      throw new NotFoundException('Appointment not found');
+    }
+    return acceptAppointment;
+  }
 }
