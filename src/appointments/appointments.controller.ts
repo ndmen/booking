@@ -1,14 +1,7 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-} from '@nestjs/common';
+import { Controller, Post, Body, Param } from '@nestjs/common';
 import { AppointmentsService } from './appointments.service';
 import { CreateAppointmentDto } from './dto/create-appointment.dto';
+import { AcceptAppointmentDto } from './dto/accept-appointment.dto';
 import { UpdateAppointmentDto } from './dto/update-appointment.dto';
 import { ApiTags } from '@nestjs/swagger';
 
@@ -18,12 +11,14 @@ export class AppointmentsController {
   constructor(private readonly appointmentsService: AppointmentsService) {}
 
   @Post()
-  async create(@Body() createAppointmentDto: CreateAppointmentDto) {
-    return await this.appointmentsService.create(createAppointmentDto);
+  async creatAappointment(@Body() createAppointmentDto: CreateAppointmentDto) {
+    return await this.appointmentsService.createAappointment(
+      createAppointmentDto,
+    );
   }
 
-  // @Post('accept/id')
-  // async accept(@Body() createAppointmentDto: CreateAppointmentDto) {
-  //   return await this.appointmentsService.accept(createAppointmentDto);
-  // }
+  @Post('accept/:appointment_id')
+  async acceptAappointment(@Param('appointment_id') appointment_id: string) {
+    return await this.appointmentsService.acceptAappointment(appointment_id);
+  }
 }

@@ -9,12 +9,24 @@ export class AppointmentsRepository {
   ) {}
 
   async createOne(appointment): Promise<any> {
-    const createOne = await this.appointmentModel.create(appointment);
-    return createOne;
+    const result = await this.appointmentModel.create(appointment);
+    return result;
   }
 
-  async findOne(id): Promise<any> {
-    const findOne = await this.appointmentModel.findOne({ _id: id });
-    return findOne;
+  async findOne(appointment_id): Promise<any> {
+    const result = await this.appointmentModel.findById(appointment_id);
+    return result;
+  }
+
+  async updateOne(appointment_id): Promise<any> {
+    const result = await this.appointmentModel.updateOne(
+      {
+        _id: appointment_id,
+      },
+      {
+        active: true,
+      },
+    );
+    return result;
   }
 }
