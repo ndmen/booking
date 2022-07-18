@@ -9,20 +9,20 @@ export class UsersRepository {
   ) {}
 
   async createOne(user): Promise<any> {
-    const createOne = await this.userModel.create(user);
-    return createOne;
+    const result = await this.userModel.create(user);
+    return result;
   }
 
   async findOne(email): Promise<any> {
-    const findOne = await this.userModel.findOne({ email: email });
-    return findOne;
+    const result = await this.userModel.findOne({ email: email });
+    return result;
   }
 
   async updateOne(user, appointment): Promise<any> {
-    const updateOne = await this.userModel.updateOne(
+    const result = await this.userModel.updateOne(
       { _id: user },
       { $push: { appointments: appointment } },
     );
-    return updateOne;
+    return result;
   }
 }

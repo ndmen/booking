@@ -5,12 +5,12 @@ import { UsersRepository } from './users.repository';
 export class UsersService {
   constructor(private readonly usersRepository: UsersRepository) {}
 
-  async create(CreateUserDto): Promise<any> {
+  async createUser(CreateUserDto): Promise<any> {
     const user = await this.usersRepository.createOne(CreateUserDto);
     return user;
   }
 
-  async findOne(email): Promise<any> {
+  async findUserByEmail(email): Promise<any> {
     const user = this.usersRepository.findOne(email);
     if (!user) {
       throw new NotFoundException('User not found');
