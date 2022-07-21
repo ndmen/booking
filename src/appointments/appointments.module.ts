@@ -8,6 +8,7 @@ import {
 } from 'src/_schemas/appointment.schema';
 import { AppointmentsRepository } from './appointments.repository';
 import { UsersModule } from 'src/users/users.module';
+import { DoctorsModule } from 'src/doctors/doctors.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { UsersModule } from 'src/users/users.module';
       { name: Appointment.name, schema: AppointmentSchema },
     ]),
     UsersModule,
+    DoctorsModule,
   ],
   controllers: [AppointmentsController],
   providers: [AppointmentsService, AppointmentsRepository],

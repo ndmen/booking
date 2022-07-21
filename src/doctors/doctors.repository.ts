@@ -17,4 +17,17 @@ export class DoctorsRepository {
     const result = await this.doctorModel.findOne({ email: email });
     return result;
   }
+
+  async findOneById(id): Promise<any> {
+    const result = await this.doctorModel.findOne({ _id: id });
+    return result;
+  }
+
+  async updateOne(doctor, appointment): Promise<any> {
+    const result = await this.doctorModel.updateOne(
+      { _id: doctor },
+      { $push: { appointments_accepted: appointment } },
+    );
+    return result;
+  }
 }

@@ -5,6 +5,7 @@ import {
 } from '@nestjs/common';
 import { AppointmentsRepository } from './appointments.repository';
 import { UsersService } from 'src/users/users.service';
+import { DoctorsService } from 'src/doctors/doctors.service';
 import { AcceptAppointmentDto } from './dto/accept-appointment.dto';
 
 @Injectable()
@@ -12,6 +13,7 @@ export class AppointmentsService {
   constructor(
     private readonly appointmentsRepository: AppointmentsRepository,
     private readonly usersService: UsersService,
+    private readonly doctorsService: DoctorsService,
   ) {}
 
   async createAppointment(CreateAppointmentDto): Promise<any> {
@@ -52,13 +54,17 @@ export class AppointmentsService {
 
   async acceptAppointment(appointment_id: string): Promise<any> {
     const findAppointment = await this.findAppointmentById(appointment_id);
-    const acceptAppointment = await this.appointmentsRepository.updateOne(
+    const acceptedAppointment = await this.appointmentsRepository.updateOne(
       findAppointment._id,
     );
-    if (!acceptAppointment) {
+    if (!acceptedAppointment) {
       throw new NotFoundException('Appointment not found');
     }
-    return acceptAppointment;
+    const acceptDoctorAppointment = await this.doctorsService.updateAppointment(
+      findAppointment.doctor,
+      findAppointment._id,
+    );
+    return acceptedAppointment;
   }
 
   async declineAppointment(appointment_id: string): Promise<any> {
