@@ -69,6 +69,10 @@ export class AppointmentsService {
     const removeAppointment = await this.appointmentsRepository.removeOne(
       findAppointment._id,
     );
+    const removeUserAppointment = await this.usersService.removeAppointment(
+      findAppointment.user,
+      findAppointment._id,
+    );
     return removeAppointment;
   }
 }

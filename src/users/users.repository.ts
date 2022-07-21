@@ -25,4 +25,12 @@ export class UsersRepository {
     );
     return result;
   }
+
+  async removeOne(user, appointment): Promise<any> {
+    const result = await this.userModel.findOneAndUpdate(
+      { _id: user },
+      { $pullAll: { appointments: [appointment] } },
+    );
+    return result;
+  }
 }

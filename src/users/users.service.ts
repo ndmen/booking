@@ -25,4 +25,12 @@ export class UsersService {
     }
     return updatedUser;
   }
+
+  async removeAppointment(user, appointment): Promise<any> {
+    const updatedUser = this.usersRepository.removeOne(user, appointment);
+    if (!updatedUser) {
+      throw new NotFoundException('User not found');
+    }
+    return updatedUser;
+  }
 }
