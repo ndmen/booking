@@ -71,7 +71,7 @@ export class AppointmentsService {
         findAppointment._id,
         findAppointment.user,
         findAppointment.doctor,
-        findAppointment.data,
+        findAppointment.date,
       );
 
     return acceptedAppointment;

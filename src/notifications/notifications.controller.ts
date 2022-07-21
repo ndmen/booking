@@ -17,8 +17,8 @@ import { ApiTags } from '@nestjs/swagger';
 export class NotificationsController {
   constructor(private readonly notificationsService: NotificationsService) {}
 
-  @Post()
-  createNotification(@Body() createNotificationDto: CreateNotificationDto) {
-    return this.notificationsService.createNotification(createNotificationDto);
-  }
+  // @Post()
+  // createNotification(@Body() createNotificationDto: CreateNotificationDto) {
+  //   return this.notificationsService.createCronNotification(createNotificationDto);
+  // }
 }
