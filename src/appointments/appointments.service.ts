@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  ForbiddenException,
+} from '@nestjs/common';
 import { AppointmentsRepository } from './appointments.repository';
 import { UsersService } from 'src/users/users.service';
 import { AcceptAppointmentDto } from './dto/accept-appointment.dto';
@@ -10,7 +14,14 @@ export class AppointmentsService {
     private readonly usersService: UsersService,
   ) {}
 
-  async createAappointment(CreateAppointmentDto): Promise<any> {
+  async createAppointment(CreateAppointmentDto): Promise<any> {
+    const findActiveAppointments = await this.checkAppointment(
+      CreateAppointmentDto.doctor_id,
+      true,
+    );
+    if (findActiveAppointments.length >= 3) {
+      throw new ForbiddenException('Doctor not free');
+    }
     const appointment = await this.appointmentsRepository.createOne(
       CreateAppointmentDto,
     );
@@ -21,7 +32,7 @@ export class AppointmentsService {
     return appointment;
   }
 
-  async findAappointmentById(appointment_id: string): Promise<any> {
+  async findAppointmentById(appointment_id: string): Promise<any> {
     const appointment = await this.appointmentsRepository.findOne(
       appointment_id,
     );
@@ -31,8 +42,16 @@ export class AppointmentsService {
     return appointment;
   }
 
-  async acceptAappointment(appointment_id: string): Promise<any> {
-    const findAppointment = await this.findAappointmentById(appointment_id);
+  async checkAppointment(doctor_id: string, active: boolean): Promise<any> {
+    const findActiveAppointments = await this.appointmentsRepository.findAll(
+      doctor_id,
+      active,
+    );
+    return findActiveAppointments;
+  }
+
+  async acceptAppointment(appointment_id: string): Promise<any> {
+    const findAppointment = await this.findAppointmentById(appointment_id);
     const acceptAppointment = await this.appointmentsRepository.updateOne(
       findAppointment._id,
     );
@@ -42,8 +61,8 @@ export class AppointmentsService {
     return acceptAppointment;
   }
 
-  async declineAappointment(appointment_id: string): Promise<any> {
-    const findAppointment = await this.findAappointmentById(appointment_id);
+  async declineAppointment(appointment_id: string): Promise<any> {
+    const findAppointment = await this.findAppointmentById(appointment_id);
     const acceptAppointment = await this.appointmentsRepository.updateOne(
       findAppointment._id,
     );

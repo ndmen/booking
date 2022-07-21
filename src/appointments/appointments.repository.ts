@@ -18,6 +18,13 @@ export class AppointmentsRepository {
     return result;
   }
 
+  async findAll(doctor_id, active): Promise<any> {
+    const result = await this.appointmentModel.find({
+      $and: [{ doctor_id: doctor_id }, { active: active }],
+    });
+    return result;
+  }
+
   async updateOne(appointment_id): Promise<any> {
     const result = await this.appointmentModel.updateOne(
       {

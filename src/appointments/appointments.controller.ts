@@ -11,19 +11,19 @@ export class AppointmentsController {
   constructor(private readonly appointmentsService: AppointmentsService) {}
 
   @Post()
-  async createAappointment(@Body() createAppointmentDto: CreateAppointmentDto) {
-    return await this.appointmentsService.createAappointment(
+  async createAppointment(@Body() createAppointmentDto: CreateAppointmentDto) {
+    return await this.appointmentsService.createAppointment(
       createAppointmentDto,
     );
   }
 
   @Post('accept/:appointment_id')
-  async acceptAappointment(@Param('appointment_id') appointment_id: string) {
-    return await this.appointmentsService.acceptAappointment(appointment_id);
+  async acceptAppointment(@Param('appointment_id') appointment_id: string) {
+    return await this.appointmentsService.acceptAppointment(appointment_id);
   }
 
   @Post('decline/:appointment_id')
-  async declineAappointment(@Param('appointment_id') appointment_id: string) {
-    return await this.appointmentsService.declineAappointment(appointment_id);
+  async declineAppointment(@Param('appointment_id') appointment_id: string) {
+    return await this.appointmentsService.declineAppointment(appointment_id);
   }
 }
