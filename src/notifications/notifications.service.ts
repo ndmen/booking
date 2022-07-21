@@ -24,18 +24,24 @@ export class NotificationsService {
       this.addMessageToLogFile(appointment_id, user, doctor, date);
     });
 
-    await this.schedulerRegistry.addCronJob(`${Date.now()} - ${user}`, job2h);
+    await this.schedulerRegistry.addCronJob(
+      `${Date.now()} - 2h - ${user} - ${appointment_id}`,
+      job2h,
+    );
     job2h.start();
-    console.log('Job will start in ' + date2h);
-    await this.schedulerRegistry.addCronJob(`${Date.now()} - ${user}`, job24h);
+    console.log('Job will done at ' + date2h);
+    await this.schedulerRegistry.addCronJob(
+      `${Date.now()} - 24h - ${user} - ${appointment_id}`,
+      job24h,
+    );
     job24h.start();
-    console.log('Job will start in ' + date24h);
+    console.log('Job will done at ' + date24h);
 
     return 'Notification was added';
   }
 
   async addMessageToLogFile(appointment_id, user, doctor, date) {
-    const data =
+    const message =
       Date.now() +
       ' Hi ' +
       user +
@@ -45,7 +51,7 @@ export class NotificationsService {
       date +
       '\n';
     const writeStream = fs.createWriteStream('notifications.log');
-    writeStream.write(data, 'utf-8');
+    writeStream.write(message, 'utf-8');
     writeStream.on('finish', () => {
       console.log('Wrote all data to file notifications.log');
     });
