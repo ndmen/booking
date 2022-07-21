@@ -6,10 +6,12 @@ import { DoctorsModule } from './doctors/doctors.module';
 import { AppointmentsModule } from './appointments/appointments.module';
 import { NotificationsModule } from './notifications/notifications.module';
 import { MongooseModule } from '@nestjs/mongoose';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://localhost/booking'),
+    ConfigModule.forRoot(),
+    MongooseModule.forRoot(process.env.BOOKING_DB),
     UsersModule,
     DoctorsModule,
     AppointmentsModule,
