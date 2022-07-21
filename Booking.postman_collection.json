@@ -1,0 +1,136 @@
+{
+	"info": {
+		"_postman_id": "dcdd3ef8-06e7-4e6f-86ff-70fc5175c65a",
+		"name": "Booking",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19489247"
+	},
+	"item": [
+		{
+			"name": "Create User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"user5@gmail.com\",\r\n    \"type\": \"user5\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Doctor",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"user@gmail.com\",\r\n    \"type\": \"doc\",\r\n    \"spec\": \"therapist\",\r\n    \"free\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/doctors",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"doctors"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Appointment",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"date\": \"2022-07-21T17:09:46\",\r\n    \"user\": \"62d43d987b1bdc12541395cd\",\r\n    \"doctor\": \"62d43d9a7b1bdc12541395cf\",\r\n    \"active\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/appointments",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"appointments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Accept Appointment",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/appointments/accept/62d95d403c5d47175d65cbd3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"appointments",
+						"accept",
+						"62d95d403c5d47175d65cbd3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Decline Appointment",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/appointments/decline/62d8fbe4beef1be70d3a9033",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"appointments",
+						"decline",
+						"62d8fbe4beef1be70d3a9033"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
