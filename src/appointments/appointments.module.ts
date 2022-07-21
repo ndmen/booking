@@ -9,6 +9,7 @@ import {
 import { AppointmentsRepository } from './appointments.repository';
 import { UsersModule } from 'src/users/users.module';
 import { DoctorsModule } from 'src/doctors/doctors.module';
+import { NotificationsModule } from 'src/notifications/notifications.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { DoctorsModule } from 'src/doctors/doctors.module';
     ]),
     UsersModule,
     DoctorsModule,
+    NotificationsModule,
   ],
   controllers: [AppointmentsController],
   providers: [AppointmentsService, AppointmentsRepository],

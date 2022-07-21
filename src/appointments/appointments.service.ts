@@ -6,6 +6,7 @@ import {
 import { AppointmentsRepository } from './appointments.repository';
 import { UsersService } from 'src/users/users.service';
 import { DoctorsService } from 'src/doctors/doctors.service';
+import { NotificationsService } from 'src/notifications/notifications.service';
 import { AcceptAppointmentDto } from './dto/accept-appointment.dto';
 
 @Injectable()
@@ -14,6 +15,7 @@ export class AppointmentsService {
     private readonly appointmentsRepository: AppointmentsRepository,
     private readonly usersService: UsersService,
     private readonly doctorsService: DoctorsService,
+    private readonly notificationsService: NotificationsService,
   ) {}
 
   async createAppointment(CreateAppointmentDto): Promise<any> {
@@ -64,6 +66,14 @@ export class AppointmentsService {
       findAppointment.doctor,
       findAppointment._id,
     );
+    const addCronNotification =
+      await this.notificationsService.createCronNotification(
+        findAppointment._id,
+        findAppointment.user,
+        findAppointment.doctor,
+        findAppointment.data,
+      );
+
     return acceptedAppointment;
   }
 
