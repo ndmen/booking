@@ -63,12 +63,12 @@ export class AppointmentsService {
 
   async declineAppointment(appointment_id: string): Promise<any> {
     const findAppointment = await this.findAppointmentById(appointment_id);
-    const acceptAppointment = await this.appointmentsRepository.updateOne(
-      findAppointment._id,
-    );
-    if (!acceptAppointment) {
+    if (!findAppointment) {
       throw new NotFoundException('Appointment not found');
     }
-    return acceptAppointment;
+    const removeAppointment = await this.appointmentsRepository.removeOne(
+      findAppointment._id,
+    );
+    return removeAppointment;
   }
 }

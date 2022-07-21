@@ -36,4 +36,11 @@ export class AppointmentsRepository {
     );
     return result;
   }
+
+  async removeOne(appointment_id): Promise<any> {
+    const result = await this.appointmentModel.findByIdAndDelete(
+      appointment_id,
+    );
+    return result;
+  }
 }
