@@ -24,7 +24,20 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+It's a Booking service on Nest.js and MongoDB. You can:
+1. Create a User
+2. Create a Doctor
+3. Create an Appointment
+4. Accept an Appointment
+5. Decline an Appointment
+
+It's works:
+1. Create User and Doctor
+2. Create Appointment with id User and Doctor(If Doctor have 3 acceped Appointments, return 'Doctor not free')
+3. Accept an Appointment as a Doctor(Created Notification Cron Job: -2h and -24h)
+4. Chek file notification.log with messages
+
+You can import file https://github.com/ndmen/booking/blob/main/Booking.postman_collection.json in your Postman. Or using Swagger http://localhost:3000/api/#/
 
 ## Installation
 
