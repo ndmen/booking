@@ -10,18 +10,33 @@ export class NotificationsService {
   constructor(private readonly schedulerRegistry: SchedulerRegistry) {}
 
   async createCronNotification(appointment_id, user, doctor, date) {
+    const typeTime = {
+      time2h: '2h',
+      time24h: '24h',
+    };
+
     const date24h = new Date(date);
     date24h.setDate(date24h.getDate() - 1);
-    console.log(date24h);
     const date2h = new Date(date);
     date2h.setTime(date2h.getTime() - 1 * 2 * 60 * 60 * 1000);
-    console.log(date2h);
 
     const job2h = new CronJob(date2h, () => {
-      this.addMessageToLogFile(appointment_id, user, doctor, date);
+      this.addMessageToLogFile(
+        appointment_id,
+        user,
+        doctor,
+        date,
+        typeTime.time2h,
+      );
     });
     const job24h = new CronJob(date24h, () => {
-      this.addMessageToLogFile(appointment_id, user, doctor, date);
+      this.addMessageToLogFile(
+        appointment_id,
+        user,
+        doctor,
+        date,
+        typeTime.time24h,
+      );
     });
 
     await this.schedulerRegistry.addCronJob(
@@ -40,8 +55,17 @@ export class NotificationsService {
     return 'Notification was added';
   }
 
-  async addMessageToLogFile(appointment_id, user, doctor, date) {
-    const message =
+  async addMessageToLogFile(appointment_id, user, doctor, date, type) {
+    const message2h =
+      Date.now() +
+      ' Hi ' +
+      user +
+      '! You have 2 hours to go to ' +
+      doctor +
+      ' on ' +
+      date +
+      '\n';
+    const message24h =
       Date.now() +
       ' Hi ' +
       user +
@@ -50,11 +74,22 @@ export class NotificationsService {
       ' tomorrow at ' +
       date +
       '\n';
-    const writeStream = fs.createWriteStream('notifications.log');
-    writeStream.write(message, 'utf-8');
-    writeStream.on('finish', () => {
-      console.log('Wrote all data to file notifications.log');
-    });
-    writeStream.end();
+
+    if (type === '2h') {
+      const writeStream = fs.createWriteStream('notifications.log');
+      writeStream.write(message2h, 'utf-8');
+      writeStream.on('finish', () => {
+        console.log('Wrote all data to file notifications.log');
+      });
+      writeStream.end();
+    }
+    if (type === '24h') {
+      const writeStream = fs.createWriteStream('notifications.log');
+      writeStream.write(message24h, 'utf-8');
+      writeStream.on('finish', () => {
+        console.log('Wrote all data to file notifications.log');
+      });
+      writeStream.end();
+    }
   }
 }
