@@ -34,7 +34,7 @@ It's a Booking service on Nest.js and MongoDB. You can:
 It's works:
 1. Create User and Doctor
 2. Create Appointment with id User and Doctor(If Doctor have 3 acceped Appointments, return 'Doctor not free')
-3. Accept an Appointment as a Doctor(Created Notification Cron Job: -2h and -24h)
+3. Accept an Appointment as a Doctor(If date Appointments < now date, return 'Appointment not valid'. If all OK - created Notification Cron Job: -2h and -24h)
 4. Chek file notification.log with messages
 5. Decline an Appointment as a Doctor(Appointment will deleted from database Appointments and Users)
 
