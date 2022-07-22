@@ -29,10 +29,6 @@ export class AppointmentsService {
     const appointment = await this.appointmentsRepository.createOne(
       CreateAppointmentDto,
     );
-    const user = await this.usersService.updateAppointment(
-      appointment.user,
-      appointment._id,
-    );
     return appointment;
   }
 
@@ -62,6 +58,15 @@ export class AppointmentsService {
     if (!acceptedAppointment) {
       throw new NotFoundException('Appointment not found');
     }
+    const appointmentDate = new Date(findAppointment.date);
+    const nowDate = new Date(Date.now());
+    if (appointmentDate < nowDate) {
+      throw new ForbiddenException('Appointment not valid');
+    }
+    const user = await this.usersService.updateAppointment(
+      findAppointment.user,
+      findAppointment._id,
+    );
     const acceptDoctorAppointment = await this.doctorsService.updateAppointment(
       findAppointment.doctor,
       findAppointment._id,
