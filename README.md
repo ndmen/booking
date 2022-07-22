@@ -36,7 +36,7 @@ It's works:
 2. Create Appointment with id User and Doctor(If Doctor have 3 acceped Appointments, return 'Doctor not free')
 3. Accept an Appointment as a Doctor(If date Appointments < now date, return 'Appointment not valid'. If all OK - created Notification Cron Job: -2h and -24h)
 4. Chek file notification.log with messages
-5. Decline an Appointment as a Doctor(Appointment will deleted from database Appointments and Users)
+5. Decline an Appointment as a Doctor(Appointment will deleted from database Appointments)
 
 You can import file https://github.com/ndmen/booking/blob/main/Booking.postman_collection.json in your Postman. Or using Swagger http://localhost:3000/api/#/
 
